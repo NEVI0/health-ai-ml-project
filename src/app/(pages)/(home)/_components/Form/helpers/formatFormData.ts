@@ -7,6 +7,7 @@ export default function formatFormData(formData: FormData) {
   const highChol = formData.get('highChol') || 'off';
   const smoker = formData.get('smoker') || 'off';
   const physActivity = formData.get('physActivity') || 'off';
+  const model = formData.get('model') || 'random_florest_model';
 
   const formattedWeight = Number(
     weight.toString().replace(',', '.').replace(' Kg', '')
@@ -20,10 +21,11 @@ export default function formatFormData(formData: FormData) {
   return {
     BMI: bmi,
     Age: parseInt(age.toString()),
-    Sex: sex.toString(),
-    HighBP: highBP.toString() !== 'off' ? true : false,
-    HighChol: highChol.toString() !== 'off' ? true : false,
-    Smoker: smoker.toString() !== 'off' ? true : false,
-    PhysActivity: physActivity.toString() !== 'off' ? true : false,
+    Sex: sex.toString() === 'female' ? 0 : 1,
+    HighBP: highBP.toString() !== 'off' ? 1 : 0,
+    HighChol: highChol.toString() !== 'off' ? 1 : 0,
+    Smoker: smoker.toString() !== 'off' ? 1 : 0,
+    PhysActivity: physActivity.toString() !== 'off' ? 1 : 0,
+    Model: model,
   };
 }
