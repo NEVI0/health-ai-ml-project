@@ -2,9 +2,15 @@
 
 import { createContext, useContext, useState } from 'react';
 
+export interface Result {
+  diabetic: boolean;
+  probability: number;
+  message: string;
+}
+
 interface HomeContextProps {
-  result: string;
-  setResult(result: string): void;
+  result: Result | null;
+  setResult(result: Result | null): void;
 
   error: string;
   setError(error: string): void;
@@ -13,7 +19,7 @@ interface HomeContextProps {
 const HomeContext = createContext<HomeContextProps>({} as HomeContextProps);
 
 export function HomeProvider({ children }: { children: React.ReactNode }) {
-  const [result, setResult] = useState<string>('');
+  const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string>('');
 
   return (

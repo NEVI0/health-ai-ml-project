@@ -4,11 +4,18 @@ interface Data {
 }
 
 export default function proccessResult(data: Data) {
-  const probability = (data.probability * 100).toFixed(2).replaceAll('.', ',');
+  const probability = data.probability * 100;
+  const probFormatted = probability.toFixed(2).replaceAll('.', ',');
+
+  let message = `Seus dados indicam que você tem ${probFormatted}% de chances de TER diabetes!`;
 
   if (!data.diabetic) {
-    return `Seus dados indicam que você tem ${probability}% de chances de NÃO ter diabetes!`;
+    message = `Seus dados indicam que você tem ${probFormatted}% de chances de NÃO ter diabetes!`;
   }
 
-  return `Seus dados indicam que você tem ${probability}% de chances de TER diabetes!`;
+  return {
+    message,
+    probability,
+    diabetic: Boolean(data.diabetic),
+  };
 }

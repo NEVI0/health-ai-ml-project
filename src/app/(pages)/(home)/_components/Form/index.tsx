@@ -36,7 +36,7 @@ export default function Form() {
 
     try {
       setError('');
-      setResult('');
+      setResult(null);
       setLoading(true);
 
       const formData = new FormData(event.currentTarget);
@@ -53,8 +53,8 @@ export default function Form() {
 
       setResult(proccessResult(data));
     } catch (error) {
-      console.log({ error });
       if (error instanceof Error) return setError(error.message);
+
       setError(
         'Não foi possivel processar seus dados... por favor tente novamente!'
       );
@@ -68,14 +68,28 @@ export default function Form() {
       <FieldSet>
         <FieldGroup className="flex flex-col md:flex-row gap-4 md:gap-8">
           <Field>
-            <FieldLabel htmlFor="age">Sua idade</FieldLabel>
-            <Input
-              id="age"
-              name="age"
-              type="number"
-              autoComplete="off"
-              required
-            />
+            <FieldLabel htmlFor="age">Faixa de idade</FieldLabel>
+
+            <Select name="age" required>
+              <SelectTrigger>
+                <SelectValue placeholder="Selecionar" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">Entre 18 e 24</SelectItem>
+                <SelectItem value="2">Entre 25 e 29</SelectItem>
+                <SelectItem value="3">Entre 30 e 34</SelectItem>
+                <SelectItem value="4">Entre 35 e 39</SelectItem>
+                <SelectItem value="5">Entre 40 e 44</SelectItem>
+                <SelectItem value="6">Entre 45 e 49</SelectItem>
+                <SelectItem value="7">Entre 50 e 54</SelectItem>
+                <SelectItem value="8">Entre 55 e 59</SelectItem>
+                <SelectItem value="9">Entre 60 e 64</SelectItem>
+                <SelectItem value="10">Entre 65 e 69</SelectItem>
+                <SelectItem value="11">Entre 70 e 74</SelectItem>
+                <SelectItem value="12">Entre 75 e 79</SelectItem>
+                <SelectItem value="13">Mais de 80</SelectItem>
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field>
